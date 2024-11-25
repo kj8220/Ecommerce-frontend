@@ -1,0 +1,140 @@
+<div class="items">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+
+				<!-- Breadcrumb -->
+				<nav class="breadcrumb-category" aria-label="breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="#">Home</a></li>
+						<li class="breadcrumb-item"><a href="#">Mobile Phones</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Apple</li>
+					</ol>
+				</nav>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-5">
+				<img class="single-item-image" src="{{product.imageUrl}}" alt="" />
+			</div>
+			<div class="col-md-7 single-item">
+				<h6>{{product.productName}}</h6>
+				<hr />
+				<h6>Price: ${{product.price}}</h6>
+				<h6>Brand: {{product.manufacturer}}</h6>
+				<h6>Availability: <span class="single-item-availability"
+						style="color:red">{{product.availability.availability}}</span></h6>
+
+				<div class="user-rating">
+					<label for="input-2" class="control-label">Avg. User Rating</label>
+					<span class="user-rating-star"><i class="fa fa-star-o"></i></span>
+					<span class="user-rating-star"><i class="fa fa-star-o"></i></span>
+					<span class="user-rating-star"><i class="fa fa-star-o"></i></span>
+					<span class="user-rating-star"><i class="fa fa-star-o"></i></span>
+					<span class="user-rating-star"><i class="fa fa-star-o"></i></span>
+				</div>
+				<hr />
+				<button class="btn">Add to Cart</button>
+				<button class="btn">Add to Wishlist</button>
+
+			</div>
+		</div>
+		<hr>
+		<div class="container">
+			<div class="row">
+				<ul class="single-item-tab-list nav nav-tabs" id="myTab" role="tablist">
+					<li class="nav-item">
+						<a class="nav-link active" data-toggle="tab" href="#tab1" role="tab" aria-controls="description"
+							aria-selected="true">Description</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" data-toggle="tab" href="#tab3" role="tab" aria-controls="reviews"
+							aria-selected="false">Reviews</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="tab-content">
+					<!-- Description -->
+					<div class="tab-pane active" id="tab1">
+						<h5>{{product.productName}}</h5>
+						<hr>
+						<p>{{product.description}}</p>
+						<hr>
+						<h5 class="title">Product Specs</h5>
+						<table class="table table-striped tcart">
+							<tbody>
+								<tr *ngFor="let p of product.attributeList">
+									<td><strong>{{p.attributeName}}</strong></td>
+									<td innerHtml={{p.attributeValue}}></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+					<!-- Review -->
+					<div class="tab-pane" id="tab3">
+						<h5 class="title">Write a Review</h5>
+
+						<div class="form form-small">
+							<!-- Review form (not working)-->
+							<form class="form-horizontal">
+								<!-- Name -->
+								<div class="form-group">
+									<label class="control-label col-md-3" for="name2">Your Name</label>
+									<div class="col-md-6">
+										<input type="text" class="form-control" id="name2">
+									</div>
+								</div>
+								<!-- Select box -->
+								<div class="form-group">
+									<label class="control-label col-md-3">Rating</label>
+									<div class="col-md-6">
+										<select class="form-control">
+											<option>&nbsp;</option>
+											<option>1</option>
+											<option>2</option>
+											<option>3</option>
+											<option>4</option>
+											<option>5</option>
+										</select>
+									</div>
+								</div>
+
+								<!-- Review -->
+								<div class="form-group">
+									<label class="control-label col-md-3" for="name">Your Review</label>
+									<div class="col-md-6">
+										<textarea class="form-control"></textarea>
+									</div>
+								</div>
+								<!-- Buttons -->
+								<div class="form-group">
+									<!-- Buttons -->
+									<div class="col-md-6 col-md-offset-3">
+										<button type="submit" class="btn btn-default">Post</button>
+										<button type="reset" class="btn btn-default">Reset</button>
+									</div>
+								</div>
+							</form>
+						</div>
+
+						<h5>Product Reviews</h5>
+						<div class="item-review" *ngFor="let rating of product.productRatingDtoList">
+							<h5>{{rating.userName}} - <span class="color">{{rating.ratingStars}}/5</span></h5>
+							<p class="rmeta">27/1/2012</p>
+							<p>{{rating.review}}<span (click)="deleteReview()" class="float-right"><i class="fa fa-trash"></i></span></p>
+						</div>
+
+						<hr />
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
