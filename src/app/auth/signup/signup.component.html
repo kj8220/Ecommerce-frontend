@@ -1,0 +1,15 @@
+<div class="signup-container">
+    <h2>Sign Up</h2>
+    <input type="text" [(ngModel)]="user.name" placeholder="Full Name">
+    <input type="email" [(ngModel)]="user.email" placeholder="Email">
+    <input type="password" [(ngModel)]="user.password" placeholder="Password">
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+    <button (click)="signup()">Sign Up</button>
+
+    <!-- 🔹 Link to Login Page -->
+    <p class="switch-link">Already have an account? 
+      <a (click)="goToLogin()">Login here</a>
+    </p>
+</div>
