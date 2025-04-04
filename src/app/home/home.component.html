@@ -1,21 +1,46 @@
-<!-- Items -->
-<div class="items">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h3 class="title">Popular Deals</h3>                
-            </div>
-            <!-- Item #1 -->
-            <div class="col-md-3 col-sm-4" *ngFor="let p of $products | async">
-                <div class="item">
-                    <a href="/product-page?sku={{p.sku}}"><img class="item-image" src="{{p.imageUrl}}" alt="" /></a>
-                    <h6><a href="/product-page?sku={{p.sku}}">{{p.productName}}</a></h6>
-                    <hr />
-                    <div class="item-price float-left">${{p.price}}</div>
-                    <button class="btn float-right">Add to Cart</button>
-                </div>
-            </div>
-        </div>
+<div class="home-container">
+  <h1>Welcome to <span class="brand-name">GoCart 🛒</span></h1>
+
+  <!-- Search and Filters in the Same Row -->
+  <div class="search-filter-container">
+    <div class="search-bar">
+      <input type="text" placeholder="Search products..." [(ngModel)]="searchQuery" (input)="searchProducts()" />
+      <button (click)="searchProducts()">🔍 Search</button>
     </div>
+
+    <div class="filter-section">
+      <select [(ngModel)]="category">
+        <option value="">All Categories</option>
+        <option value="electronics">Electronics</option>
+        <option value="fashion">Fashion</option>
+        <option value="home">Home</option>
+      </select>
+
+      <input type="number" [(ngModel)]="minPrice" placeholder="Min Price" />
+      <input type="number" [(ngModel)]="maxPrice" placeholder="Max Price" />
+
+      <button (click)="applyFilters()">Apply</button>
+      <button (click)="clearFilters()">Clear</button>
+    </div>
+  </div>
+
+  <div *ngIf="products.length === 0" class="no-products">
+    <p>No products found 😕</p>
+  </div>
+
+  <div class="product-grid">
+    <div *ngFor="let product of products" class="product-card">
+      <img [src]="product.imageUrl" alt="{{ product.name }}" />
+      <h3>{{ product.name }}</h3>
+      <p>{{ product.description }}</p>
+      <span class="price">${{ product.price }}</span>
+      <button (click)="addToCart(product)">🛒 Add to Cart</button>
+    </div>
+  </div>
+
+  <div class="pagination-controls">
+    <button (click)="changePage(false)" [disabled]="currentPage === 0">⬅️ Prev</button>
+    <span> Page {{ currentPage + 1 }} of {{ totalPages }} </span>
+    <button (click)="changePage(true)" [disabled]="currentPage >= totalPages - 1">Next ➡️</button>
+  </div>  
 </div>
-<!--/ Items end -->
